@@ -7,6 +7,7 @@ struct  Node  {
     struct Node* next;
     int value;
 };
-void show_list(struct Node* start);
+// ugly as hell
+void show_list(void* start);
 
 #endif
