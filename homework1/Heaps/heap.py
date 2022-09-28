@@ -12,13 +12,18 @@ class heap:
 
         # Load the shared library into c types.
         self._bsize = 9
-        self._heap_name =  pathlib.Path(os.environ.get("HEAPLIB")).absolute()/"testheap.so"
+        self._heap_name =  pathlib.Path().absolute()/"testheap.so"
 
         if not self._heap_name:
             raise "missing c implementation please set HEAPLIB otherwise die"
 
         self._singlepp = ndpointer(dtype = np.int32, ndim = 1, flags = 'C')
         self._cheap = ctypes.CDLL(self._heap_name)
+
+        print(self._cheap)
+
+        self._cheap.help()
+
         self._cheap.max_heapify.argtypes = [self._singlepp, ctypes.c_int, ctypes.c_int]
         self._cheap.max_heapify.restype = ctypes.c_void_p
         self._cheap.min_heapify.argtypes = [self._singlepp, ctypes.c_int, ctypes.c_int]

@@ -1,8 +1,11 @@
 // heap.c
 
-#include <stdio.h>
 #include "testheap.h"
 
+
+void help(){
+    printf("hello folks !!!\n");
+}
 
 void max_heapify( int *arr, int i, int hs){
 
