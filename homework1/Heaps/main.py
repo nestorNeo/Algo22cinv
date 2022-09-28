@@ -7,14 +7,14 @@ import time
 def startHeap(x, htype="max"):
     HObject = heap(htype)
     HObject.read_data(x)
-    HObject.print_container()
+    #HObject.print_container()
     HObject.build_heap()
-    HObject.print_container()
-    print(HObject._length)
+    #HObject.print_container()
+    #print(HObject._length)
 
 if __name__ == "__main__":
     # Object heap
-    inputSize = range(10,13)
+    inputSize = range(10,1000000)
 
     plotMaxArraySizeX = []
     plotMaxExecution  = []
@@ -42,4 +42,14 @@ if __name__ == "__main__":
     fig.subplots_adjust(hspace=0.5)
     ax.plot(plotMaxArraySizeX,plotMaxExecution)
     ay.plot(plotMaxArraySizeX,plotMinExecution)
-    plt.savefig("grafica.jpg")
+    
+    ax.set_xlabel('Arreglo')
+    ax.set_ylabel('Tiempo')
+    ay.set_xlabel('Arreglo')
+    ay.set_ylabel('Tiempo')
+    ax.grid(True)
+    ay.grid(True)
+
+    
+    ax.set_ylabel('Tiempo')
+    plt.savefig("graficas.jpg")

@@ -22,8 +22,6 @@ class heap:
 
         print(self._cheap)
 
-        self._cheap.help()
-
         self._cheap.max_heapify.argtypes = [self._singlepp, ctypes.c_int, ctypes.c_int]
         self._cheap.max_heapify.restype = ctypes.c_void_p
         self._cheap.min_heapify.argtypes = [self._singlepp, ctypes.c_int, ctypes.c_int]
