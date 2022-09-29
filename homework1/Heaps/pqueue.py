@@ -1,7 +1,11 @@
 from ctypes.wintypes import HPALETTE
+import queue
 import numpy as np
 from heap import heap
 import ctypes
+import random
+import time
+import matplotlib.pyplot as plt
 
 
 class pqueue(heap):
@@ -11,14 +15,14 @@ class pqueue(heap):
     def pop(self):
         # dequeue
         if len(self._container) > 1:
-            print(self._container)
+            #print(self._container)
             topPriority = self._container[1]
 
             self._container = self._container[1:]
             self._container[0] = 0
             self._length  = ctypes.c_int(self._container.shape[0]-1)
             self.build_heap()
-            print("top priority is", topPriority)
+            #print("top priority is", topPriority)
             return topPriority
         
         return None
@@ -34,25 +38,54 @@ class pqueue(heap):
         self._length = ctypes.c_int(self._container.shape[0]-1)
         self.build_heap()
     
+    
 if __name__ == "__main__":
-    x = np.arange(9, dtype = np.int32)
+    x = np.arange(0, dtype = np.int32)
 
     myqueue = pqueue()
     myqueue.read_data(x)
     myqueue.build_heap()
-    myqueue.print_container()
+
+    inputSize = range(1,10000)
+
+    plotAdd = []
+    plotpop = []
+    plotMaxArraySizeX = []
+
+
+    for n in inputSize:
+        start = time.time()
+        myqueue.add(random.randint(-10000,10000))
+        end = time.time()
+        plotMaxArraySizeX.append(n)
+        plotAdd.append(end - start)
 
     while True:
+        start = time.time()
         priority = myqueue.pop()
-
+        end = time.time()
+        if priority:
+            plotpop.append(end - start)
         if priority is None:
             break
 
-        print("done highest priority is", priority)
+    fig, (ax,ay) = plt.subplots(2, 1)
+    fig.subplots_adjust(hspace=0.5)
+    ax.plot(plotMaxArraySizeX,plotAdd)
+    ay.plot(plotpop)
+    ay.invert_xaxis()
+    
+    
+    ax.set_xlabel('Arreglo')
+    ay.set_xlabel('Arreglo')
+    ay.set_ylabel('Tiempo elementos, sec')
+    ax.grid(True)
+    ay.grid(True)
 
-    myqueue.add(99)
-    myqueue.add(1000)
-    myqueue.add(50)
+    
+    ax.set_ylabel('Entrada de elementos, sec')
+    plt.savefig("grafy.jpg")
+
 
 
 
