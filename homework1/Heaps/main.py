@@ -14,7 +14,7 @@ def startHeap(x, htype="max"):
 
 if __name__ == "__main__":
     # Object heap
-    inputSize = range(10,1000000)
+    inputSize = range(10,200000)
 
     plotMaxArraySizeX = []
     plotMaxExecution  = []
