@@ -77,7 +77,7 @@ if __name__ == "__main__":
     
     
     ax.set_xlabel('Arreglo')
-    ay.set_xlabel('Arreglo')
+    ay.set_xlabel('Arreglo.')
     ay.set_ylabel('Tiempo elementos, sec')
     ax.grid(True)
     ay.grid(True)
